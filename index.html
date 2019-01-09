@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css'/>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'/>
-    <script src="style.css"></script>
+    <link rel="stylesheet" href="style.css">
     <title>breweries</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
     
                 <div class="input">
 
-                <input class="form-control form-control-lg" type="text" class="name" id="full_name"  placeholder="Breweries name..." autocomplete="off">
+                <input class="form-control form-control-lg" type="text" class="name typeahead" id="full_name"  placeholder="Brewerie name..." autocomplete="off" onkeyup="success()" >
 
                 <h5 class="mt-4">Select a State</h5>
                 <select id="states" class="browser-default custom-select">
@@ -75,17 +75,17 @@
                         <option value="WI">Wisconsin</option>
                         <option value="WY">Wyoming</option>
                     </select>
-
                 </div>
     
-                <input class="submit btn btn-secondary d-block mt-3 mb-4" type="submit" value="Search"/>
+                <!-- <input class="submit btn btn-secondary d-block mt-3 mb-4" type="submit" value="Search"/> -->
     
             </form>
                 </div>
+
             <div id="information"></div>
+            
     </div>
     
-
     <script src="script.js"></script>
 </body>
 </html>

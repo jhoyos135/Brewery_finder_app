@@ -1,3 +1,17 @@
 a {
     text-decoration: none !important;
 }
+
+.hide {
+    opacity: 0;
+    height: 0;
+    transition: opacity 0.2s ease-in-out 0.1s;
+    overflow: hidden;
+
+}
+
+.show {
+    opacity: 1;
+    height: auto;
+    transition: opacity 0.2s ease-in-out 0.1s;
+}
