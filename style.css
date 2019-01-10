@@ -1,3 +1,7 @@
+body {
+    background: #d3d3d3;
+}
+
 a {
     text-decoration: none !important;
 }
@@ -14,4 +18,32 @@ a {
     opacity: 1;
     height: auto;
     transition: opacity 0.2s ease-in-out 0.1s;
+}
+
+.form-control:focus,
+.custom-select:focus {
+    color: #495057;
+    background-color: #fff;
+    border: none !important;
+    outline: 0;
+    box-shadow: none !important;
+}
+
+input {
+    caret-color: hotpink !important;
+}
+
+#information {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 15px 0 15px;
+}
+
+#information .card {
+    flex-grow: 1;
+    min-width: 50%;
+    max-width: 100%;
+    overflow: hidden;
+    
 }

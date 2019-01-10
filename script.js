@@ -4,11 +4,9 @@
 
 window.addEventListener('DOMContentLoaded', () => {
 
-
 // let submit = document.querySelector('.submit');
 let name_input = document.querySelector('#full_name');
 var form = document.getElementsByName('contact-form')[0];
-
 let submitHandle = () => {
 
     // e.preventDefault()
@@ -88,23 +86,32 @@ name_input.addEventListener('keyup', () => {
     
 });
 
+
+let states = document.getElementById("states");
+var selectedString = states.options[states.selectedIndex].text;
+
+states.onchange = function(){
+   
+    submitHandle();
+}
+
+
 });
 
 let name = document.querySelector("#full_name");
 let information = document.querySelector("#information");
-let states = document.getElementById("states");
 
 let success = () => {
     if(name.value.length === 0 || name.value.length === '' ) { 
 
-        information.classList.add('hide');
-        information.classList.remove('show');
-        information.innerHTML = '';
+        // information.classList.add('hide');
+        // information.classList.remove('show');
+        // information.innerHTML = '';
         
        } else { 
 
-        information.classList.add('show');
-        information.classList.remove('hide');
+        // information.classList.add('show');
+        // information.classList.remove('hide');
         
        }
        
