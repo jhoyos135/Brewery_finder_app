@@ -10,6 +10,13 @@
     <title>breweries</title>
 </head>
 <body>
+    <!-- Image and text -->
+<nav class="navbar navbar-light bg-light sticky-top">
+    <a class="navbar-brand" href="https://juliandhoyos.com" target="_blank">
+      <img src="Logo.png" width="50" height="50" class="d-inline-block align-center" alt="">
+      juliandhoyos.com
+    </a>
+  </nav>
 
     <div class="container text-center mt-5">
             <h1 class="center">Find a Brewery</h1>
@@ -17,8 +24,6 @@
             <form id="search" name="contact-form" class="col-md-12">
     
                 <div class="input">
-
-                <input class="form-control form-control-lg" type="text" class="name typeahead" id="full_name"  placeholder="Brewerie name..." autocomplete="off" onkeyup="success()" >
 
                 <h5 class="mt-4">Select a State</h5>
                 <select id="states" class="browser-default custom-select">
@@ -75,6 +80,7 @@
                         <option value="WI">Wisconsin</option>
                         <option value="WY">Wyoming</option>
                     </select>
+    <input class="form-control form-control-lg name mt-3" type="text" id="full_name"  placeholder="Filter by name..." autocomplete="off" onkeyup="success()" >
                 </div>
     
                 <!-- <input class="submit btn btn-secondary d-block mt-3 mb-4" type="submit" value="Search"/> -->

@@ -29,7 +29,7 @@ let submitHandle = () => {
     for(let i in breweries) {
         let json = breweries[i];
 
-            // console.log(json)
+            console.log(json)
 
            let info =  document.querySelector("#information");
            let name = json.name;
@@ -50,7 +50,7 @@ let submitHandle = () => {
             </div>
             <div class="card-body">
                 <h5 class="card-title">
-                    ${address} 
+                  <a target="_blank" href="https://www.google.ca/maps/place/${street},+${state},+${postal}/"> ${address} </a>
                 </h5>
 
                 <div class="mt-2">
@@ -88,13 +88,12 @@ name_input.addEventListener('keyup', () => {
 
 
 let states = document.getElementById("states");
-var selectedString = states.options[states.selectedIndex].text;
+// var selectedString = states.options[states.selectedIndex].text;
 
 states.onchange = function(){
    
     submitHandle();
 }
-
 
 });
 
