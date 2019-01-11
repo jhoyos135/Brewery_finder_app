@@ -29,7 +29,7 @@ let submitHandle = () => {
     for(let i in breweries) {
         let json = breweries[i];
 
-            console.log(json)
+            // console.log(json)
 
            let info =  document.querySelector("#information");
            let name = json.name;
