@@ -46,19 +46,22 @@ let submitHandle = () => {
         <div class="card mt-3 mb-3">
             <div class="card-header">
                 <h4> ${name} </h4> 
-                <span>Type: ${brewery_type} </span>
+                <p>Type: ${brewery_type} </p>
+                <p>City: ${city} </p>
             </div>
             <div class="card-body">
-                <h5 class="card-title">
-                  <a target="_blank" href="https://www.google.ca/maps/place/${street},+${state},+${postal}/"> ${address} </a>
+                <div>
+                <h5>
+                  <a target="_blank" href="https://www.google.ca/maps/place/${street},+${state},+${postal}/" class="btn btn-secondary"> Address </a>
                 </h5>
+                </div>
 
                 <div class="mt-2">
                 <h4> <span><a class="btn btn-primary" href="${website}" target="_blank"> Visit Website </a>
                 </h4>
                 </div>
 
-                <div class="text-right">
+                <div class="text-right call">
                 <h5> <i class="fa fa-phone mr-"></i>
                     <a href="tel://+1${phone}"> Call </a>
                 </h5> 

@@ -6,6 +6,10 @@ a {
     text-decoration: none !important;
 }
 
+p {
+    margin: 0 !important;
+}
+
 .hide {
     opacity: 0;
     height: 0;
@@ -46,4 +50,15 @@ input {
     max-width: 100%;
     overflow: hidden;
     
+}
+
+.call {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 15px;
+}
+
+.btn {
+    width: 50% !important;
 }
