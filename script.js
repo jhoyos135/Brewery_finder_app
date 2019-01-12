@@ -62,8 +62,10 @@ let submitHandle = () => {
                 </div>
 
                 <div class="text-right call">
-                <h5> <i class="fa fa-phone mr-"></i>
-                    <a href="tel://+1${phone}"> Call </a>
+                <h5>
+                    <a href="tel://+1${phone}">
+                        <i class="fa fa-phone fa-2x"></i>
+                    </a>
                 </h5> 
                 </div>
             </div>
