@@ -1,8 +1,3 @@
-/*
-// api used: https://www.openbrewerydb.org
-*/
-
-
 window.addEventListener('DOMContentLoaded', () => {
 
     let city_input = document.querySelector('#full_city');
@@ -11,19 +6,16 @@ window.addEventListener('DOMContentLoaded', () => {
     let next = document.querySelector('.next');
     let prev = document.querySelector('.prev');
     let selection = document.querySelector('.selection');
-    
-    const fetch_brew = async (full_google_name,name) => {
-    
-        // let states = document.getElementById("states");
-        // let state = `&by_state=${states.options[states.selectedIndex].text}`;
+    let class_weather = document.querySelector('.weather');
+
+// fetch breweries
+const fetch_brew = async (full_google_name,name) => {
         
-    
         let url = `https://api.openbrewerydb.org/breweries${full_google_name}&page=${pageNum}&per_page=1&sort=name&by_name=${name}`;        
         // console.log(url);
         
         let res = await fetch(url);
         let breweries = await res.json();
-        
         
         if(breweries.length == 0) {
             selection.classList.add('disabled');
@@ -32,7 +24,6 @@ window.addEventListener('DOMContentLoaded', () => {
             selection.classList.remove('disabled');  
         }
         
-    
     for(let i in breweries) {
         let json = breweries[i];
     
@@ -45,14 +36,14 @@ window.addEventListener('DOMContentLoaded', () => {
            let street = json.street;
            let city = json.city;
            let state = json.state;
-           let postal = json.postal_code;
+           let postal = parseFloat(json.postal_code);
            let phone = json.phone;
            let website = json.website_url;
            let address = `${street}, ${city}, ${state}, ${postal}`;
            let lat = parseFloat(json.latitude);
-           let lon = parseFloat(json.longitude);
+           let lon = parseFloat(json.longitude);    
 
-           console.log(lat, lon)
+        //    console.log(lat, lon)
     
            info.innerHTML += `
         <div class="card hoverable z-depth-1">
@@ -88,14 +79,13 @@ window.addEventListener('DOMContentLoaded', () => {
     </div>
            `;
 
-
         let custom_modals = document.getElementById(`${id}`);
 
         custom_modals.innerHTML += `
         
         <!-- Modal Trigger -->
         <button class="modal-trigger indigo search" data-target="bar-${id}">
-            <i class="material-icons small indigo white-text"> gps_fixed </i>
+            <i class="material-icons small indigo white-text"> hotel </i>
         </button>
     
             <!-- Modal Structure -->
@@ -119,20 +109,25 @@ window.addEventListener('DOMContentLoaded', () => {
         </div>
         `;
         
-
     if(website === '') {
-        document.getElementById(`website-${id}`).textContent = 'No Website found!';
+        document.getElementById(`website-${id}`).innerHTML = `
+        <div class="login_page">
+            <h1> No Website found! </h1>
+        </div>
+        `;
     };
 
     document.querySelector(`[data-target="bar-${id}"]`).addEventListener('click', () => {
+
         foursquare(city,lon,lat,id);
 
     });
 
+    fetch_weather(postal);
+
     };
 
-
-      // setup materialize components
+      // setup materialize modals
       let modals = document.querySelectorAll('.modal');
       M.Modal.init(modals);
 
@@ -142,39 +137,26 @@ window.addEventListener('DOMContentLoaded', () => {
         name_input.value = '';
         pageNum = 1;
         if(city_input.value == '') {
+
             document.querySelector("#information").innerHTML = '';
+            name_input.setAttribute('disabled', '');
+            class_weather.innerHTML = '';
+            
+        } else {
+            name_input.removeAttribute('disabled');
         }
 
     });
+
     name_input.addEventListener('keyup', () => {
 
         pageNum = 1;
-        let location_info = document.getElementById("full_city").value.split(",");
-        let cityName = location_info[0].toLowerCase().trim();
-        let stateName = location_info[1].toLowerCase().trim();
-        stateName = abbrState(stateName, 'name').toLowerCase();
-        let full_google_name = `?by_city=${cityName}&by_state=${stateName}`;
-        submitHandle(full_google_name, name_input.value);
+
+        get_location_data();
 
     });
-    
-    
-    // let states = document.getElementById("states");
-    
-    // states.onchange = function() {
-    //     let single_state = states.options[states.selectedIndex].text;
-    
-    //     pageNum = 1;
-    //     submitHandle(city_input.value, name_input.value);
-    //     fetch_weather(single_state);
-    //     selection.classList.remove('disabled');
-    //     city_input.value = '';
 
-    // };
-
-
-    // Pagination functionality
-
+// Pagination functionality
 let page_up = () => {
     pageNum = pageNum + 1;
 };
@@ -183,44 +165,44 @@ let page_down = () => {
     pageNum = pageNum - 1;
 };
 
-
 next.addEventListener('click', () => {
     if(document.querySelector("#information").childElementCount === 0 ) {
         selection.classList.add('disabled');
     } else {
+
         page_up();
-        let location_info = document.getElementById("full_city").value.split(",");
-        let cityName = location_info[0].toLowerCase().trim();
-        let stateName = location_info[1].toLowerCase().trim();
-        stateName = abbrState(stateName, 'name').toLowerCase();
-        let full_google_name = `?by_city=${cityName}&by_state=${stateName}`;
-        submitHandle(full_google_name,name_input.value);
+
+        get_location_data();
+
     }
 });
 
 prev.addEventListener('click', () => {
     if(pageNum !== 1) {
         page_down();
-        let location_info = document.getElementById("full_city").value.split(",");
-        let cityName = location_info[0].toLowerCase().trim();
-        let stateName = location_info[1].toLowerCase().trim();
-        stateName = abbrState(stateName, 'name').toLowerCase();
-        let full_google_name = `?by_city=${cityName}&by_state=${stateName}`;
-        submitHandle(full_google_name,name_input.value);
+
+        get_location_data();
+
         selection.classList.remove('disabled');
     }
 });
 
-
 // google autocomplete api
-var options = {
+let options = {
         types: ['(cities)'],
         componentRestrictions: { country: 'us' }
-    };
+};
 autocomplete = new google.maps.places.Autocomplete(city_input, options);
 
-let get_map_data = () => {
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+const get_map_data = () => {
+    google.maps.event.addListener(autocomplete, 'place_changed', () => {
+
+        get_location_data();
+
+});
+};
+
+const get_location_data = () => {
     let location_info = document.getElementById("full_city").value.split(",");
     let cityName = location_info[0].toLowerCase().trim();
     let stateName = location_info[1].toLowerCase().trim();
@@ -228,22 +210,16 @@ let get_map_data = () => {
     let full_google_name = `?by_city=${cityName}&by_state=${stateName}`;
     submitHandle(full_google_name,name_input.value);
     // console.log(full_google_name);
-    fetch_weather(stateName);
-
-});
 };
 
-    let submitHandle = (full_google_name,name) => {
+const submitHandle = (full_google_name,name) => {
         fetch_brew(full_google_name, name);
         document.querySelector("#information").innerHTML = '';
-    
-    };
+};
     get_map_data();
 
-    
-      // setup materialize components
+      // setup materialize modals
       let modals = document.querySelectorAll('.modal');
       M.Modal.init(modals);
-        
-    });
-    
+
+});

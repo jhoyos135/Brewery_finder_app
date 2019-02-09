@@ -1,13 +1,18 @@
-# Brewry Finder App
+# Full-Stack-Attack
 
-this application is using this api: 
-/*
-# https://www.openbrewerydb.org
-*/
+# apis used
+https://foursquare.com/developers/apps
 
-/*
-// you have to select a state and then filter by name
-*/
+https://developers.google.com/places/web-service/autocomplete
 
-website
-# https://jhoyos135.github.io/-brewery_finder/
+https://openweathermap.org/api
+
+https://www.openbrewerydb.org
+
+# css framework
+materialize
+
+# authentication and database
+firebase
+
+
