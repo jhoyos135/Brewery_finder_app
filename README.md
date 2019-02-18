@@ -1,4 +1,4 @@
-# Full-Stack-Attack
+# Brewery Finder Application
 
 # apis used
 https://foursquare.com/developers/apps
@@ -14,5 +14,11 @@ materialize
 
 # authentication and database
 firebase
+
+# Website
+https://jhoyos135.github.io/Brewery_finder_app/
+
+!(assets/BrewAzzz1.jpg)
+
 
 
