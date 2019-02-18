@@ -18,7 +18,7 @@ firebase
 # Website
 https://jhoyos135.github.io/Brewery_finder_app/
 
-!(assets/BrewAzzz1.jpg)
+!(assets/BrewZzzz1.jpg)
 
 
 
